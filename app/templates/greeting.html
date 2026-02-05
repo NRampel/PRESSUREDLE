@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,31 +8,7 @@
    
     <meta http-equiv="refresh" content="4; url={{ url_for('game.default') }}">
 
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a202c;
-            color: #e2e8f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-        }
-        .container {
-            padding: 2rem;
-            border-radius: 10px;
-            background-color: #2d3748;
-        }
-        h1 {
-            color: #63b3ed;
-        }
-        a {
-            color: #90cdf4;
-            text-decoration: none;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/greeting.css') }}">
 </head>
 <body>
     <div class="container">

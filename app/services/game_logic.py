@@ -11,7 +11,7 @@ class GameEngine:
 
     def _load_monsters(self, path):
         self.all_monsters = pd.read_csv(path)
-        self.all_monsters.columns = self.all_monsters.str.strip() 
+        self.all_monsters.columns = self.all_monsters.columns.str.strip() 
         self.all_monsters.set_index('Name:', inplace=True)
         self.headers = self.all_monsters.columns.tolist() 
         print("Monsters were successfully loaded!")
@@ -49,6 +49,8 @@ class GameEngine:
                           outcome = 'high'
                except (ValueError, TypeError): 
                      outcome = 'incorrect'
+           else:
+               outcome = 'incorrect'
            results['attributes'].append({ 
                'category': attr,
                'guess_value': guess_val,

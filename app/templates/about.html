@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Pressuredle</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a202c;
+            color: #e2e8f0;
+            text-align: center;
+            padding-top: 4rem;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        a {
+            color: #63b3ed;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>About This Game</h1>
+        <p>
+            This game was created with inspiration from both 
+            Wordle and Pressure, a roblox horror game.
+        </p>
+        <p>Pressure was created by Zeal and his development team,
+            Wordle was developed by Josh Wardle.</p>
+        <br>
+        <a href="{{ url_for('game') }}">Back to Game</a>
+    </div>
+</body>
+</html>

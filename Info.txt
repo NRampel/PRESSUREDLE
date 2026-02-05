@@ -1,0 +1,5 @@
+TECH STACK: 
+Frontend: HTML, CSS 
+Backend: Python, Flask, Pandas
+
+NOTE: ALL IMAGES ARE NOT MINE, CREDIT IS GIVEN IN GAME

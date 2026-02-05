@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attributes</title>
+    <style>
+        :root {
+            --color-bg: #1a202c;
+            --color-surface: #2d3748;
+            --color-text: #e2e8f0;
+            --color-blue: #63b3ed;
+            --border-radius: 8px;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+        h1 {
+            color: var(--color-blue);
+            text-align: center;
+        }
+        a {
+            color: var(--color-blue);
+            font-size: 1.2rem;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 2rem;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .container-nav {
+            text-align: center;
+        }
+        .attribute-block {
+            background-color: var(--color-surface);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .attribute-block h3 {
+            color: var(--color-blue);
+            margin-top: 0;
+            border-bottom: 2px solid #4a5568;
+            padding-bottom: 0.5rem;
+        }
+        .attribute-block p.description {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        .attribute-block ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .attribute-block li {
+            padding: 0.5rem;
+            border-bottom: 1px solid #4a5568;
+        }
+        .attribute-block li:last-child {
+            border-bottom: none;
+        }
+        .attribute-block li strong {
+            color: #a0aec0; 
+            min-width: 110px;
+            display: inline-block;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Monster Attributes and What They Mean</h1>
+
+        <div class="attribute-block">
+            <h3>Type</h3>
+            <p class="description">The category that best describes the monster's behavior.</p>
+            <ul>
+                <li><strong>Node:</strong> Monsters that follow a certain nodular path, and don't deviate from it.</li>
+                <li><strong>Main:</strong> Monsters that when an expendable is spotted, will either actively pursue them until they hide or open the next door, or don't fit into any of the other categories.</li>
+                <li><strong>Joke:</strong> Monsters that may or may not be harmful, rarely encountered, only added as a joke.</li>
+                <li><strong>Conditional:</strong> Monsters that only attack the expendable if a certain condition is met.</li>
+                <li><strong>Grand:</strong> Monsters that are considered exponentially more dangerous than Main monsters, they act as the "bosses" of Pressure.</li>
+                <li><strong>Not:</strong> Monsters that their first action is not to harm the expendable, but have the ability to do so.</li>
+            </ul>
+        </div>
+
+        <div class="attribute-block">
+            <h3>Alignment</h3>
+            <p class="description">The general behavior or stance of the monster towards the expendable.</p>
+            <ul>
+                <li><strong>Hostile:</strong> Monsters that will actively seek out and harm the expendable on sight.</li>
+                <li><strong>Neutral:</strong> Monsters that may not actively seek out the expendable, but will harm them if provoked or if they come too close.</li>
+                <li><strong>Docile:</strong> Monsters that do not wish to harm the expendable.</li>
+                <li><strong>Conditional:</strong> A branch of neutral that will only harm the expendable if a certain condition is met.</li>
+            </ul>
+        </div>
+
+        <div class="attribute-block">
+            <h3>Rarity</h3>
+            <p class="description">How often a monster is encountered within a run.</p>
+            <ul>
+                <li><strong>Guaranteed:</strong> The monster is guaranteed to appear every so often.</li>
+                <li><strong>Common:</strong> Monsters that appear frequently throughout a run, but vary in exact frequency.</li>
+                <li><strong>Uncommon:</strong> Monsters that appear less frequently than common monsters, but more often than rare ones.</li>
+                <li><strong>Rare:</strong> Monsters that may only appear once or twice in a run.</li>
+                <li><strong>Elusive:</strong> Monsters that appear very rarely, even once within a run.</li>
+                <li><strong>Conditional:</strong> Monsters that will only appear if a certain condition is met.</li>
+            </ul>
+        </div>
+
+        <div class="attribute-block">
+            <h3>Damage</h3>
+            <p class="description">The amount of damage a monster can inflict on the expendable per attack (100 is max HP, 0 is lowest).</p>
+        </div>
+
+        <div class="attribute-block">
+            <h3>Speed</h3>
+            <p class="description">How fast a monster can move towards the expendable.</p>
+            <ul>
+                <li><strong>Slow:</strong> Monsters that move really slowly.</li>
+                <li><strong>Normal:</strong> Monsters that move at a decent speed, can get the expendable if no action is taken.</li>
+                <li><strong>Fast:</strong> Monsters that move quickly, require quick reactions from the expendable.</li>
+                <li><strong>Immediate:</strong> Monsters that reach the expendable almost instantly, require perfect reactions.</li>
+                <li><strong>Irrelevant:</strong> Monsters that do not move towards the expendable.</li>
+                <li><strong>Conditional:</strong> Monsters whose speed varies based on certain conditions.</li>
+            </ul>
+        </div>
+
+        <div class="attribute-block">
+            <h3>Mode</h3>
+            <p class="description">What gamemodes a monster appears in.</p>
+            <ul>
+                <li><strong>Story:</strong> Monsters that appear in story mode only.</li>
+                <li><strong>Story/Endless:</strong> Monsters that appear in both story mode and endless mode.</li>
+                <li><strong>Endless:</strong> Monsters that appear in endless mode only.</li>
+                <li><strong>Hunted:</strong> Monsters that appear in The Hunted mode only.</li>
+                <li><strong>Raveyard:</strong> Monsters that appear in the Raveyard mode only.</li>
+                <li><strong>All:</strong> Monsters that appear in every mode.</li>
+            </ul>
+        </div>
+
+        <div class="attribute-block">
+            <h3>Rebounds</h3>
+            <p class="description">If a monster will rebound if it reaches the end of a room.</p>
+            <ul>
+                <li><strong>Yes:</strong> The monster will rebound.</li>
+                <li><strong>No:</strong> The monster will not rebound.</li>
+            </ul>
+        </div>
+
+        <div class="attribute-block">
+            <h3>Sex</h3>
+            <p class="description">The biological sex of the monster, if applicable.</p>
+            <ul>
+                <li><strong>Male:</strong> The monster has been confirmed to be male.</li>
+                <li><strong>Female:</strong> The monster has been confirmed to be female.</li>
+                <li><strong>Unknown:</strong> The monster has a biological sex, but which one has not been confirmed.</li>
+                <li><strong>Sexless:</strong> The monster does not have a biological sex.</li>
+                <li><strong>Both:</strong> The monster can be either male or female, depending on the individual.</li>
+            </ul>
+        </div>
+
+        <div class="container-nav">
+            <a href="{{ url_for('game') }}">Back to Game</a>
+        </div>
+    </div>
+</body>
+</html>

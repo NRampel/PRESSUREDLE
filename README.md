@@ -9,7 +9,7 @@
 
 
 
-Welcome to **Pressuredle**, a browser game similar to Wordle that was based on PRESSURE, a Roblox Horror Game
+Welcome to **Pressuredle**, a browser game similar to Wordle that was based on PRESSURE, a Roblox Survival-Horror Game
 * **PRESSURE** was created, designed and programmed by Zeal and his developer team
 * **WORDLE** was created by Josh Wardle and the New York Times
 

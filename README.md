@@ -27,7 +27,7 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
 2. Enter your guess in the guessing bar, game will provide feedback:
    * **🟩 Green** Indicates correctness
    * **🟥 Red** Indicates incorrectness
-   * **⬆️⬇️ Arrows** (Coming Soon) Indicates how you're incorrect for the numerical traits 
+   * **⬆️⬇️ Arrows** (Coming Soon) Indicates how incorrect you are for the numerical traits 
 3. To navigate through the site, click on the links above the difficulty bar
 
 ## 🚀 Installation & Setup: 

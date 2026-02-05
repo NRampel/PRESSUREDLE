@@ -1,0 +1,9 @@
+from app.services.game_logic import GameEngine
+
+def test_game_logic(): 
+    try: 
+        engine = GameEngine() 
+        assert engine is not None 
+        print("Engine successful")
+    except Exception as e:
+        assert False, f"Engine initialization failed: {e}"

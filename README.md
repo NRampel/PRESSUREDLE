@@ -61,8 +61,9 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
      * Open your browser to 'http://127.0.0.1:5000' to play!
 
 ## 👥 Contributors: 
-* **Nicolas Rampelotto** - Lead Backend Engineer
-* **Jonathan Davila** - Collaborator/Backend Engineer
+* **Nicolas Rampelotto** - *Lead Backend Engineer/Frontend Engineer*
+*   *
+* **Jonathan Davila** - *Collaborator/Backend Engineer*
   
 ## ⬆️ Future Updates: 
 * Configuring Images so people can see the monster the game selected

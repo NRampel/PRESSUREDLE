@@ -61,7 +61,7 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
      * Open your browser to 'http://127.0.0.1:5000' to play!
 
 ## 👥 Contributors: 
-* **Nicolas Rampelotto** - *Lead Backend Engineer/Frontend Engineer*
+* **Nicolas Rampelotto** - *Lead Backend Engineer*
    * Designed Flask/Python Architecture
    * Developed the game logic and state management
    * Modularized code and established dependancies

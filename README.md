@@ -12,9 +12,9 @@
 Welcome to **Pressuredle**, a browser game similar to Wordle that was based on PRESSURE, a Roblox Horror Game
 
 ## Tech Stack
-**Frontend:** HTML, CSS
-**Backend:** Python, Flask, Pandas, Spotipy
-**Data:** Custom CSV datasets for the monsters and their information
+* **Frontend:** HTML, CSS
+* **Backend:** Python, Flask, Pandas, Spotipy
+* **Data:** Custom CSV datasets for the monsters and their information
 
 ## How to Play: 
 1. Enter your difficulty in the difficulty bar (or don't)

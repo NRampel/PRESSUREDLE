@@ -3,3 +3,4 @@ pandas
 spotipy
 python-dotenv
 flake8
+numpy

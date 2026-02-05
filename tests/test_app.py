@@ -1,14 +1,18 @@
-import os 
-import sys
+import pytest
+from app import create_app 
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+@pytest.fixture
+def client():
+    create_app.config['TESTING'] = True
+    create_app.config['SECRET_KEY'] = 'test_key' 
 
-from app.services.game_logic import GameEngine
+    with create_app.test_client() as client:
+        with create_app.app_context():
+            yield client
 
-def test_game_logic(): 
-    try: 
-        engine = GameEngine() 
-        assert engine is not None 
-        print("Engine successful")
-    except Exception as e:
-        assert False, f"Engine initialization failed: {e}"
+def test_game_route_logic(client):
+    setup = client.post('/set_difficulty', data={'difficulty': 'medium'}, follow_redirects=True)
+    assert setup.status_code == 200
+    response = client.post('/game_loop', data={'monster_guess': 'Pandemonium'}, follow_redirects=True)
+    assert response.status_code == 200
+    assert b"Pandemonium" in response.data

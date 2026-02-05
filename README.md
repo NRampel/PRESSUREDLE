@@ -42,7 +42,7 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
 ## ⚡ Key Features: 
 * **Data Driven Logic:** Uses **Pandas** to efficiently compare monster stats from a custom datasheet
 * **Immersive Audio:** Uses **Spotipy** to play random songs from PRESSURE's ost
-* **Dynamic Web Server:** Built on **Flask** to handle the state of the game adequately
+* **Dynamic Web Server:** Built on **Flask** to handle game state adequately
 * **CI/CD Pipeline:** Uses a workspace to automatically lint code and test the game engine on every commit
 
 ## 🚀 Installation & Setup: 

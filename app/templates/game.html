@@ -16,7 +16,7 @@
         </nav>
 
         <div class="form-group">
-            <form action="{{ url_for('game.set_difficulty') }}" method="POST">
+            <form id="difficulty-form" action="{{ url_for('game.set_difficulty') }}" method="POST">
                 <label for="difficulty-select">Select Difficulty:</label>
                 <select name="difficulty" id="difficulty-select">
                     <option value="easy" {% if session_data.get('difficulty') == 'easy' %}selected{% endif %}>Easy</option>
@@ -32,7 +32,7 @@
                 <p>
                     Current Difficulty: <strong>{{ session_data.get('difficulty', 'medium') | capitalize }}</strong> |
                     Turns Remaining: <strong>{{ session_data.get('total_turns', 0) - session_data.get('turns_taken', 0) }}</strong>
-                    Stopwatch: <strong id="stopwatch">00:00</strong>
+                    | Stopwatch: <strong id="stopwatch">00:00</strong>
                 </p>
             </div>
         {% endif %}
@@ -61,8 +61,9 @@
                     <h2>Game Over!</h2>
                     <p>You've used all your turns. The monster was: <strong>{{ session_data.get('selected_monster') }}</strong></p>
                 {% endif %}
+                    <h2>Time took: <strong id="final-time">Calculating...</strong></h2>
                 
-                <form action="{{ url_for('game.set_difficulty') }}" method="POST">
+                <form id="play-again-form" action="{{ url_for('game.set_difficulty') }}" method="POST">
                     <input type="hidden" name="difficulty" value="{{ session_data.get('difficulty', 'medium') }}">
                     <button type="submit">Play Again</button>
                 </form>
@@ -117,14 +118,39 @@
 
         (function() {
             const stopwatch = document.getElementById('stopwatch');
-            if (stopwatch) {
-                let seconds = 0;
-                setInterval(function() {
-                    seconds++;
-                    const m = Math.floor(seconds / 60).toString().padStart(2, '0');
-                    const s = (seconds % 60).toString().padStart(2, '0');
-                    stopwatch.textContent = `${m}:${s}`;
-                }, 1000);
+
+            const resetTimer = () => sessionStorage.removeItem('pressuredle_start_time');
+            const difficultyForm = document.getElementById('difficulty-form');
+            if (difficultyForm) difficultyForm.addEventListener('submit', resetTimer);
+            const playAgainForm = document.getElementById('play-again-form');
+            if (playAgainForm) playAgainForm.addEventListener('submit', resetTimer);
+
+            let startTime = sessionStorage.getItem('pressuredle_start_time');
+            if (!startTime && document.querySelector('input[name="monster_guess"]')) {
+                startTime = Date.now();
+                sessionStorage.setItem('pressuredle_start_time', startTime);
+            }
+
+            if (startTime) {
+                const getElapsed = () => Math.floor((Date.now() - startTime) / 1000);
+
+                if (stopwatch) {
+                    const updateTimer = () => {
+                        const elapsed = getElapsed();
+                        const m = Math.floor(elapsed / 60).toString().padStart(2, '0');
+                        const s = (elapsed % 60).toString().padStart(2, '0');
+                        stopwatch.textContent = `${m}:${s}`;
+                    };
+                    updateTimer();
+                    if (document.querySelector('input[name="monster_guess"]')) {
+                        setInterval(updateTimer, 1000);
+                    }
+                }
+
+                const finalTime = document.getElementById('final-time');
+                if (finalTime) {
+                    finalTime.textContent = getElapsed() + " seconds";
+                }
             }
         })();
     </script>

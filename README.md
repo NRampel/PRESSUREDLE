@@ -37,7 +37,7 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
      * **pip install -r requirements.txt**
 4. **Run the Application:**
      * Type: flask run
-     * Open your browser to http://127.0.0.1:5000 to play!
+     * Open your browser to 'http://127.0.0.1:5000' to play!
      
    
 

@@ -18,4 +18,11 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
 
 **Data:** Custom CSV datasets for the monsters and their information
 
+## How to Play: 
+1. Enter your difficulty in the difficulty bar (or don't)
+2. Enter your guess in the guessing bar, game will provide feedback:
+   * **Green** Indicates correctness
+   * **Red** Indicates incorrectness
+   * **Arrows** Indicates how you're incorrect for the numerical traits (will be added soon) 
+
 

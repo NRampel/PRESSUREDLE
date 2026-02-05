@@ -31,7 +31,7 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
 3. To navigate through the site, click on the links above the difficulty bar
 
 ## 🚀 Installation & Setup: 
-### To run this game on your local machine, follow the steps below
+### To run this game on your local machine, follow the steps below: 
 1. **Clone the Repository:**
 2. **Create and Activate a Virtual Environment**
      * **Windows:** python -m venv venv  (if the former executed) venv\Scripts\activate

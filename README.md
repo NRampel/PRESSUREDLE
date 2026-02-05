@@ -31,8 +31,8 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
 ## Installation & Setup: 
 1. **Clone the Repository:**
 2. **Create and Activate a Virtual Environment**
-     '''
-        #Windows: python -m venv venv
+     '''bash
+        # Windows: python -m venv venv
         venv\Scripts\activate '''
      
    

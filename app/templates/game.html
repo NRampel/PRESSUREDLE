@@ -156,13 +156,13 @@
     <div class="container">
         <h1>Pressuredle</h1>
         <nav>
-            <a href="{{ url_for('game') }}">Game</a>
-            <a href="{{ url_for('about') }}">About</a>
-            <a href="{{ url_for('view_attributes') }}">Attributes</a> 
+            <a href="{{ url_for('game.default') }}">Game</a>
+            <a href="{{ url_for('main.about') }}">About</a>
+            <a href="{{ url_for('main.view_attributes') }}">Attributes</a> 
         </nav>
 
         <div class="form-group">
-            <form action="{{ url_for('difficulty_setting') }}" method="POST">
+            <form action="{{ url_for('game.set_difficulty') }}" method="POST">
                 <label for="difficulty-select">Select Difficulty:</label>
                 <select name="difficulty" id="difficulty-select">
                     <option value="easy" {% if session_data.get('difficulty') == 'easy' %}selected{% endif %}>Easy</option>
@@ -193,7 +193,7 @@
 
         {% if not session_data.get('game_over') %}
             <div class="form-group">
-                <form method="POST" action="{{ url_for('game') }}" autocomplete="off">
+                <form method="POST" action="{{ url_for('game.game_loop') }}" autocomplete="off">
                     <input type="text" name="monster_guess" placeholder="Type monster name..." size="30" autofocus>
                     <button type="submit">Guess</button>
                 </form>
@@ -208,7 +208,7 @@
                     <p>You've used all your turns. The monster was: <strong>{{ session_data.get('selected_monster') }}</strong></p>
                 {% endif %}
                 
-                <form action="{{ url_for('difficulty_setting') }}" method="POST">
+                <form action="{{ url_for('game.set_difficulty') }}" method="POST">
                     <input type="hidden" name="difficulty" value="{{ session_data.get('difficulty', 'medium') }}">
                     <button type="submit">Play Again</button>
                 </form>

@@ -3,7 +3,7 @@ from .config import Config
 
 def create_app(): 
     app = Flask(__name__)
-    app.config.from_object('Config')
+    app.config.from_object('app.config.Config')
     from app.routes.main import main_bp
     from app.routes.game import game_bp
     from app.routes.auth import auth_bp    

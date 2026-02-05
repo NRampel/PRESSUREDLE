@@ -31,7 +31,7 @@ def game_loop():
         if not session.get('game_over', False):
             user_guess = request.form.get('monster_guess', '').strip()
 
-            if user_guess and user_guess in GAME_ENGINE.is_valid_guess(user_guess):
+            if user_guess and GAME_ENGINE.is_valid_guess(user_guess):
                 previous_guesses = [g['guess'] for g in session.get('guesses', [])]
                 if user_guess in previous_guesses:
                     flash(f"You already guessed {user_guess}. Try a different monster.")

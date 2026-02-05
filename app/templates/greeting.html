@@ -6,7 +6,7 @@
     <title>Pressuredle</title>
 
    
-    <meta http-equiv="refresh" content="4; url={{ url_for('game') }}">
+    <meta http-equiv="refresh" content="4; url={{ url_for('game.default') }}">
 
     <style>
         body {
@@ -38,7 +38,7 @@
     <div class="container">
         <h1>Welcome to Pressuredle!</h1>
         <p>Redirecting in <span id="countdown">3</span>...</p>
-        <p><a href="{{ url_for('game') }}">Click here to skip the wait</a></p>
+        <p><a href="{{ url_for('game.default') }}">Click here to skip the wait</a></p>
     </div>
 
     <script>
@@ -52,6 +52,6 @@
             }
             if (seconds <= 0) {
                 clearInterval(interval); 
-                window.location.href = "{{ url_for('game') }}";
+                window.location.href = "{{ url_for('game.default') }}";
             }
         }, 1000);

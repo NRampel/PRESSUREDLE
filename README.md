@@ -47,9 +47,10 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
 
 ## 🚀 Installation & Setup: 
 ### To run this game on your local machine, follow the steps below: 
-1. **Clone the Repository:**
-   * git clone [https://github.com/YOUR_USERNAME/PRESSUREDLE.git](https://github.com/YOUR_USERNAME/PRESSUREDLE.git)
-   * cd PRESSUREDLE
+1. **Download The Latest Release:**
+   * Click the zip with the source code
+   * Unzip the zip file
+   * Using powershell or command prompt, cd over to the folder
 2. **Create and Activate a Virtual Environment**
      * **Windows:** python -m venv venv  (if the former executed) venv\Scripts\activate
      * **Mac/Linux:** python3 -m venv venv (if the former executed) source venv/bin/activate

@@ -5,7 +5,7 @@
 ![HTML](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css&logoColor=white)
 ![Pillow](https://img.shields.io/badge/Pillow-3776AB?style=for-the-badge&logo=python&logoColor=white)
-
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E)
 
 
 # Pressuredle (WIP) 
@@ -27,7 +27,7 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
 * If the user successfully guesses the monster, then the user wins the game. 
 
 ## 🛠️ Tech Stack
-* **Frontend:** HTML, CSS
+* **Frontend:** HTML, CSS, JavaScript
 * **Backend:** Python, Flask, Pandas, Spotipy, Pillow
 * **Data:** Custom CSV datasets for the monsters and their information
 

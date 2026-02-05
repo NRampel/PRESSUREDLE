@@ -2,5 +2,4 @@ flask
 pandas
 spotipy
 python-dotenv
-pytest
 flake8

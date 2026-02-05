@@ -8,6 +8,5 @@ def test_spotify_service():
     try: 
         spot_server = SpotifyService() 
         assert spot_server is not None
-        print("Spotify server uploaded") 
     except Exception as e: 
         assert False, f"Spotify service initialization failed: {e}"

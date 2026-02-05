@@ -3,11 +3,12 @@ from app import create_app
 
 @pytest.fixture
 def client():
-    create_app.config['TESTING'] = True
-    create_app.config['SECRET_KEY'] = 'test_key' 
+    app = create_app()
+    app.config['TESTING'] = True
+    app.config['SECRET_KEY'] = 'test_key' 
 
-    with create_app.test_client() as client:
-        with create_app.app_context():
+    with app.test_client() as client:
+        with app.app_context():
             yield client
 
 def test_game_route_logic(client):

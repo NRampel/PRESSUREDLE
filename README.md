@@ -26,6 +26,7 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
    * **Green** Indicates correctness
    * **Red** Indicates incorrectness
    * **Arrows** Indicates how you're incorrect for the numerical traits (will be added soon)
+3. To navigate through the site, click on the links above the difficulty bar 
 
 
 

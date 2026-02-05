@@ -18,6 +18,7 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
 ## 📜 Credits:
 * **PRESSURE** was created, designed and programmed by Zeal and his developer team
 * **WORDLE** was created by Josh Wardle and the New York Times
+* **PRESSUREDLE** was created by Nicolas Rampelotto and Jonathan Davila
 
 ## 📖 Project Description: 
 * **Pressuredle** will select a random monster/entity fom **PRESSURE**

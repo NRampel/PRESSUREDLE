@@ -62,8 +62,15 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
 
 ## 👥 Contributors: 
 * **Nicolas Rampelotto** - *Lead Backend Engineer/Frontend Engineer*
-*   *
+   * Designed Flask/Python Architecture
+   * Developed the game logic and state management
+   * Modularized code and established dependancies
+   * Curated and analyzed the monster dataset
+   * Configured the Spotify API
 * **Jonathan Davila** - *Collaborator/Backend Engineer*
+   * Integrated the Spotify API
+   * Authenticatd Spotify server
+   * Modified frontend to toggle button on and off
   
 ## ⬆️ Future Updates: 
 * Configuring Images so people can see the monster the game selected

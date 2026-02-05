@@ -27,7 +27,7 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
 * If the user successfully guesses the monster, then the user wins the game. 
 
 ## 🛠️ Tech Stack
-* **Frontend:** HTML, CSS, JavaScript (AI Accelerated) 
+* **Frontend:** HTML, CSS, JavaScript (Frontend AI Accelerated) 
 * **Backend:** Python, Flask, Pandas, Spotipy, Pillow (Engineered By Me, AI used if error was too difficult to figure out)
 * **Data:** Custom CSV datasets for the monsters and their information
 

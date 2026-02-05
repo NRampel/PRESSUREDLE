@@ -15,12 +15,12 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
 * **PRESSURE** was created, designed and programmed by Zeal and his developer team
 * **WORDLE** was created by Josh Wardle and the New York Times
 
-## Tech Stack
+## 🛠️ Tech Stack
 * **Frontend:** HTML, CSS
 * **Backend:** Python, Flask, Pandas, Spotipy
 * **Data:** Custom CSV datasets for the monsters and their information
 
-## How to Play: 
+## 🎮 How to Play: 
 1. Enter your difficulty in the difficulty bar (or don't)
 2. Enter your guess in the guessing bar, game will provide feedback:
    * **Green** Indicates correctness
@@ -28,7 +28,7 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
    * **Arrows** (Coming Soon) Indicates how you're incorrect for the numerical traits 
 3. To navigate through the site, click on the links above the difficulty bar
 
-## Installation & Setup: 
+## 🚀 Installation & Setup: 
 1. **Clone the Repository:**
 2. **Create and Activate a Virtual Environment**
      * **Windows:** python -m venv venv  (if the former executed) venv\Scripts\activate

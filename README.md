@@ -12,6 +12,8 @@
 
 
 Welcome to **Pressuredle**, a browser game similar to Wordle that was based on PRESSURE, a Roblox Survival-Horror Game
+**Pressuredle** will select a random monster/entity fom PRESSURE, and will prompt the user to guess what monster it picked.
+
 
 ## 📜 Credits:
 * **PRESSURE** was created, designed and programmed by Zeal and his developer team
@@ -29,6 +31,12 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
    * **🟥 Red** Indicates incorrectness
    * **⬆️⬇️ Arrows** (Coming Soon) Indicates how incorrect you are for the numerical traits 
 3. To navigate through the site, click on the links above the difficulty bar
+
+## ⚡ Key Features: 
+* **Data Driven Logic:** Uses **Pandas** to efficiently compare monster stats from a custom datasheet
+* **Immersive Audio:** Uses **Spotipy** to play random songs from PRESSURE's ost
+* **Dynamic Web Server:** Built on **Flask** to handle the state of the game adequately
+* **CI/CD Pipeline:** Uses a workspace to automatically lint code and test the game engine on every commit
 
 ## 🚀 Installation & Setup: 
 ### To run this game on your local machine, follow the steps below: 

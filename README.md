@@ -4,6 +4,7 @@
 ![Spotipy](https://img.shields.io/badge/Spotipy-1DB954?style=for-the-badge&logo=spotify&logoColor=white)
 ![HTML](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css&logoColor=white)
+![Pillow](https://img.shields.io/badge/Pillow-3776AB?style=for-the-badge&logo=python&logoColor=white)
 
 
 
@@ -27,7 +28,7 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
 
 ## 🛠️ Tech Stack
 * **Frontend:** HTML, CSS
-* **Backend:** Python, Flask, Pandas, Spotipy
+* **Backend:** Python, Flask, Pandas, Spotipy, Pillow
 * **Data:** Custom CSV datasets for the monsters and their information
 
 ## 🎮 How to Play: 
@@ -41,7 +42,7 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
 ## ⚡ Key Features: 
 * **Data Driven Logic:** Uses **Pandas** to efficiently compare monster stats from a custom datasheet
 * **Immersive Audio:** Uses **Spotipy** to play random songs from PRESSURE's ost
-* **Dynamic Web Server:** Built on **Flask** to handle the state of the game adequately
+* **Dynamic Web Server:** Built on **Flask** to handle game state adequately
 * **CI/CD Pipeline:** Uses a workspace to automatically lint code and test the game engine on every commit
 
 ## 🚀 Installation & Setup: 

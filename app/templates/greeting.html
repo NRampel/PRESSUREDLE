@@ -18,6 +18,8 @@
     </div>
 
     <script>
+        sessionStorage.removeItem('pressuredle_start_time');
+
         const countdownElement = document.getElementById('countdown');
         let seconds = 3;
 
@@ -31,3 +33,6 @@
                 window.location.href = "{{ url_for('game.default') }}";
             }
         }, 1000);
+    </script>
+</body>
+</html>

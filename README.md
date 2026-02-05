@@ -59,6 +59,11 @@ Welcome to **Pressuredle**, a browser game similar to Wordle that was based on P
 4. **Run the Application:**
      * Type: flask run
      * Open your browser to 'http://127.0.0.1:5000' to play!
+  
+### ⬆️ Future Updates: 
+* Configuring Images so people can see the monster the game selected
+* Configuring Spotify so that music will play from the webpage
+* Ability to turn off music if the user desires 
      
    
 

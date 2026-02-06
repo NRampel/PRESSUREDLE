@@ -16,7 +16,7 @@ body {
     color: var(--color-text);
     margin: 0;
     padding: 1rem;
-    background-image: url("../images/Submarine_dock.png");
+    background-image: url("../images/background.png");
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat;

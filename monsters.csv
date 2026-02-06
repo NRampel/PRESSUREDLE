@@ -3,13 +3,13 @@ Angler,Node,Hostile,Guaranteed,100,Fast,Story/Endless,No,Male
 Pinkie,Node,Hostile,Uncommon,100,Medium,Story/Endless,No,Female
 Blitz,Node,Hostile,Uncommon,100,Immediate ,Story/Endless,No,Male
 Chainsmoker,Node,Hostile,Rare,100,Slow,Story/Endless,No,Male
-Frogger,Node,Hostile,Uncommon,100,Fast,Story/Endless,Yes,Female
+Froger,Node,Hostile,Uncommon,100,Fast,Story/Endless,Yes,Female
 Squiddle,Main,Neutral,Guaranteed,40,Irrelevant,Story/Endless,No,Both
 Wall Dweller,Main,Hostile,Rare,100,Medium,Story/Endless,No,Unknown
 Trenchbleeder,Not,Docile,Guaranteed,100,Irrelevant,Story/Endless,No,Sexless
 Pandemonium,Main,Hostile,Rare,100,Conditional,Story/Endless,No,Sexless
-Abomination,Grand,Hostile,Common,50,Fast,Story/Endless,No,Male
-Vultus Luminaria,Grand,Hostile,Guaranteed,40,Medium,Story/Endless,Yes,Unknown
+Abomination,Grand,Hostile,Common,50,Fast,Story,No,Male
+Vultus Luminaria,Grand,Hostile,Guaranteed,40,Medium,Story,Yes,Unknown
 Painter,Not,Hostile,Rare,0,Irrelevant,Story/Endless,No,Sexless
 Firewall,Grand,Hostile,Common,50,Medium,Story/Endless,No,Sexless
 Harbinger,Main,Hostile,Conditional,100,Slow,Endless,Yes,Sexless
@@ -18,7 +18,7 @@ Crooked,Main,Neutral,Guaranteed,30,Fast,Hunted,No,Male
 Candlebearer,Conditional,Neutral,Uncommon,30,Slow,All,No,Sexless
 Candlebrute,Main,Hostile,Rare,40,Medium,All,No,Sexless
 Redeemer,Conditional,Hostile,Common,25,Slow,Story/Endless,No,Female
-Puddles of Void Mass,Conditional,Hostile,Guaranteed,100,Irrelevant,Story/Endless,No,Sexless
+Void Mass,Conditional,Hostile,Guaranteed,Varies,Irrelevant,Story/Endless,No,Sexless
 Good People,Conditional,Hostile,Guaranteed,60,Irrelevant,Story/Endless,No,Sexless
 Eyefestation,Main,Hostile,Guaranteed,Varies,Irrelevant,Story/Endless,No,Female
 DiVine,Conditional,Neutral,Uncommon,40,Conditional,Story/Endless,No,Sexless

@@ -19,7 +19,12 @@ def set_difficulty():
     session['turns_taken'] = 0
     session['game_over'] = False
     session['game_status'] = 'playing'
-    session['selected_monster'] = GAME_ENGINE.choose_random_monster()
+    forced_name = None
+
+    if current_app.config.get('CHEAT_MODE') and current_app.config.get('DEBUG_MONSTER'):
+        forced_name = current_app.config['DEBUG_MONSTER']
+        print(f"Debug mode: Forcing monster to {forced_name}")
+    session['selected_monster'] = GAME_ENGINE.select_monster(forced_name) 
     session['start_time'] = time.time() 
     return redirect(url_for('game.game_loop'))
 
@@ -54,11 +59,18 @@ def game_loop():
         return redirect(url_for('game.game_loop'))
 
     highlight_name = session.pop('highlight_guess', None)  
+
+    monster_image_url = None
+    if session.get('game_over') and session.get('selected_monster'):
+        monster_name = session['selected_monster']
+        monster_image_url = url_for('static', filename=f'images/{monster_name}.png')
+
     return render_template('game.html', 
                            guesses=session.get('guesses', []), 
                            headers=GAME_ENGINE.headers,
                            session_data=session, 
-                           highlight_name=highlight_name)
+                           highlight_name=highlight_name,
+                           monster_image_url=monster_image_url)
    
 
 @game_bp.route('/default', methods=['GET', 'POST'])
@@ -69,5 +81,10 @@ def default():
     session['turns_taken'] = 0
     session['game_over'] = False
     session['game_status'] = 'playing'
-    session['selected_monster'] = GAME_ENGINE.choose_random_monster()
+    forced_name = None
+
+    if current_app.config.get('CHEAT_MODE') and current_app.config.get('DEBUG_MONSTER'):
+        forced_name = current_app.config['DEBUG_MONSTER']
+        print(f"Debug mode: Forcing monster to {forced_name}")
+    session['selected_monster'] = GAME_ENGINE.select_monster(forced_name)  
     return redirect(url_for('game.game_loop'))

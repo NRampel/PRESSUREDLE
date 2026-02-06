@@ -20,6 +20,11 @@ class GameEngine:
     def choose_random_monster(self): 
         return random.choice(self.all_monsters.index)
 
+    def select_monster(self, monster_name=None):
+        if monster_name and monster_name in self.all_monsters.index:
+            return monster_name
+        return self.choose_random_monster()
+
     def is_valid_guess(self, guess_name): 
         return guess_name in self.all_monsters.index
     

@@ -60,8 +60,8 @@
                     <h2>Game Over!</h2>
                     <p>You've used all your turns. The monster was: <strong>{{ session_data.get('selected_monster') }}</strong></p>
                 {% endif %}
+                    <img src="{{ monster_image_url }}" alt="Monster Image" class="monster-reveal-img">
                     <h2>Time took: <strong id="final-time">Calculating...</strong></h2>
-                
                 <form id="play-again-form" action="{{ url_for('game.set_difficulty') }}" method="POST">
                     <input type="hidden" name="difficulty" value="{{ session_data.get('difficulty', 'medium') }}">
                     <button type="submit">Play Again</button>

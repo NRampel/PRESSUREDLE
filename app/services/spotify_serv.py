@@ -14,8 +14,15 @@ class SpotifyService:
             client_id=self.client_id,
             client_secret=self.client_secret,
             redirect_uri=self.redirect_url, 
-            scope="user-library-read user-top-read"
-        )) 
+            scope="user-library-read user-top-read")) 
+    
+    def load_playlist(Self): 
+        # Placeholder for loading a playlist or track based on game events
+        pass 
+    
+    def play_random_song(self): 
+        # Placeholder for playing a random song from the user's library or a specific playlist
+        pass
 
 
 music_player= SpotifyService() 

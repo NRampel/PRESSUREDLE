@@ -12,7 +12,8 @@
 
 
 
-Welcome to **Pressuredle**, a browser game similar to Wordle that was based on PRESSURE, a Roblox Survival-Horror Game
+Welcome to **PRESSUREDLE**, a passion project inspired by the ROBLOX Survival-Horror game **PRESSURE** and Wordle
+**NOTE: I SEEK NO PROFIT AS THIS IS ONLY A PASSION PROJECT**
 
 
 ## 📜 Credits:

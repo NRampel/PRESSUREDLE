@@ -12,7 +12,7 @@
 
 
 
-Welcome to **PRESSUREDLE**, a passion project inspired by the ROBLOX Survival-Horror game **PRESSURE** and Wordle
+Welcome to **PRESSUREDLE**, a passion project inspired by the ROBLOX Survival-Horror game **PRESSURE** and **Wordle**
 
 **NOTE: I SEEK NO PROFIT AS THIS IS ONLY A PASSION PROJECT**
 
@@ -22,7 +22,7 @@ Welcome to **PRESSUREDLE**, a passion project inspired by the ROBLOX Survival-Ho
 * **WORDLE** was created by Josh Wardle and the New York Times
 
 ## 📖 Project Description: 
-* **Pressuredle** will select a random monster/entity fom **PRESSURE**
+* **PRESSUREDLE** will select a random monster/entity fom **PRESSURE**
 * Will prompt the user to guess what monster it picked.
 * The number of guesses is determined by the use.
 * If the user runs out of guesses, then the user loses the game.

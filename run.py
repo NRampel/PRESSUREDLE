@@ -39,4 +39,4 @@ def configure_debug_mode():
 configure_debug_mode()
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()

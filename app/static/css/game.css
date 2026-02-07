@@ -110,13 +110,13 @@ button:hover {
     margin-top: 0;
 }
 .monster-reveal-img {
-    max-width: 100%;
-    height: auto;
+    width: 300px;
+    height: 300px;
+    object-fit: contain; 
     border-radius: var(--border-radius);
-    margin-top: 1.5rem;
-    border: 2px solid var(--color-blue);
-    box-shadow: 0 0 15px rgba(99, 179, 237, 0.4);
-    opacity: 0;
+    display: block; 
+    margin: 10px auto; 
+    background-color: rgba(0,0,0,0.1); 
     animation: fadeInReveal 2.5s ease-in-out forwards;
 }
 @keyframes fadeInReveal {

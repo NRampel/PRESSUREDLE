@@ -153,5 +153,16 @@
             }
         })();
     </script>
+    <script> 
+        document.addEventListener("DOMContentLoaded", function() {
+            const backgrounds = {{ bg_files | tojson}};
+            if (backgrounds.length > 0) {
+                const randomIndex = Math.floor(Math.random() * backgrounds.length);
+                const chosenImage = backgrounds[randomIndex];
+                const bgPath = "/static/images/backgrounds/" + chosenImage;
+                document.body.style.backgroundImage = `url('${bgPath}')`;
+            }
+        }); 
+    </script>
 </body>
 </html>

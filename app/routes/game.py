@@ -2,8 +2,18 @@ from flask import Blueprint, session, request, current_app, redirect, url_for, f
 from app.services.game_logic import engine as GAME_ENGINE
 from app.config import Config
 import time
+import os 
 
 game_bp = Blueprint('game', __name__) 
+
+@game_bp.context_processor
+def inject_background(): 
+    bg_fol = os.path.join(current_app.static_folder, 'images', 'backgrounds')
+    try: 
+        bg_files = [f for f in os.listdir(bg_fol) if f.endswith(('.png', '.jpg', '.jpeg'))]
+    except FileNotFoundError: 
+        bg_files = [] 
+    return {'bg_files': bg_files}
 
 @game_bp.route('/set_difficulty', methods=['POST'])
 def set_difficulty():

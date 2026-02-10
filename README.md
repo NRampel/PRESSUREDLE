@@ -28,7 +28,7 @@ Welcome to **PRESSUREDLE**, a passion project inspired by the ROBLOX Survival-Ho
 * If the user successfully guesses the monster, then the user wins the game. 
 
 ## 🛠️ Tech Stack
-* **Frontend:** HTML5, CSS3, JavaScript (Frontend AI Accelerated) 
+* **Frontend:** HTML5, CSS3, JavaScript (Frontend AI Accelerated, Can you blame me? Computer Engineers do really low level backend) 
 * **Backend:** Python, Flask, Pandas, Spotipy, Pillow (Engineered By Me)
 * **Data:** Custom CSV datasets for the monsters and their information
 

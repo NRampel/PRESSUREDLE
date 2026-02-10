@@ -22,7 +22,7 @@
                     <option value="medium" {% if session_data.get('difficulty') == 'medium' %}selected{% endif %}>Medium</option>
                     <option value="hard" {% if session_data.get('difficulty') == 'hard' %}selected{% endif %}>Hard</option>
                 </select>
-                <button type="submit">Start New Game</button>
+                <button type="submit" onclick="sessionStorage.removeItem('active_background')">Start New Game</button>
             </form>
         </div>
 
@@ -97,72 +97,8 @@
     </div>
 
     <script>
-        (function() {
-            const monsterToHighlight = "{{ highlight_guess }}";
-
-            if (monsterToHighlight) {
-                const rowId = "row-" + monsterToHighlight.replace(/ /g, '-');
-                const rowElement = document.getElementById(rowId);
-
-                if (rowElement) {
-                    rowElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    rowElement.classList.add('highlight');
-
-                    setTimeout(() => {
-                        rowElement.classList.remove('highlight');
-                    }, 2000); 
-                }
-            }
-        })();
-
-        (function() {
-            const stopwatch = document.getElementById('stopwatch');
-
-            const resetTimer = () => sessionStorage.removeItem('pressuredle_start_time');
-            const difficultyForm = document.getElementById('difficulty-form');
-            if (difficultyForm) difficultyForm.addEventListener('submit', resetTimer);
-            const playAgainForm = document.getElementById('play-again-form');
-            if (playAgainForm) playAgainForm.addEventListener('submit', resetTimer);
-
-            let startTime = sessionStorage.getItem('pressuredle_start_time');
-            if (!startTime && document.querySelector('input[name="monster_guess"]')) {
-                startTime = Date.now();
-                sessionStorage.setItem('pressuredle_start_time', startTime);
-            }
-
-            if (startTime) {
-                const getElapsed = () => Math.floor((Date.now() - startTime) / 1000);
-
-                if (stopwatch) {
-                    const updateTimer = () => {
-                        const elapsed = getElapsed();
-                        const m = Math.floor(elapsed / 60).toString().padStart(2, '0');
-                        const s = (elapsed % 60).toString().padStart(2, '0');
-                        stopwatch.textContent = `${m}:${s}`;
-                    };
-                    updateTimer();
-                    if (document.querySelector('input[name="monster_guess"]')) {
-                        setInterval(updateTimer, 1000);
-                    }
-                }
-
-                const finalTime = document.getElementById('final-time');
-                if (finalTime) {
-                    finalTime.textContent = getElapsed() + " seconds";
-                }
-            }
-        })();
+       window.GAME_BACKGROUNDS = {{ bg_files | tojson }}; 
     </script>
-    <script> 
-        document.addEventListener("DOMContentLoaded", function() {
-            const backgrounds = {{ bg_files | tojson}};
-            if (backgrounds.length > 0) {
-                const randomIndex = Math.floor(Math.random() * backgrounds.length);
-                const chosenImage = backgrounds[randomIndex];
-                const bgPath = "/static/images/backgrounds/" + chosenImage;
-                document.body.style.backgroundImage = `url('${bgPath}')`;
-            }
-        }); 
-    </script>
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
 </body>
 </html>

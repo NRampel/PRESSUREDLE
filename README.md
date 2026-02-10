@@ -1,7 +1,6 @@
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
 ![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
-![Spotipy](https://img.shields.io/badge/Spotipy-1DB954?style=for-the-badge&logo=spotify&logoColor=white)
 ![HTML](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
@@ -29,7 +28,7 @@ Welcome to **PRESSUREDLE**, a passion project inspired by the ROBLOX Survival-Ho
 
 ## 🛠️ Tech Stack
 * **Frontend:** HTML5, CSS3, JavaScript (Frontend AI Accelerated, Can you blame me? Computer Engineers do really low level backend) 
-* **Backend:** Python, Flask, Pandas, Spotipy, Pillow (Engineered By Me)
+* **Backend:** Python, Flask, Pandas, Pillow (Engineered By Me)
 * **Data:** Custom CSV datasets for the monsters and their information
 
 ## 🎮 How to Play: 
@@ -42,7 +41,6 @@ Welcome to **PRESSUREDLE**, a passion project inspired by the ROBLOX Survival-Ho
 
 ## ⚡ Key Features: 
 * **Data Driven Logic:** Uses **Pandas** to efficiently compare monster stats from a custom datasheet
-* **Immersive Audio:** Uses **Spotipy** to play random songs from PRESSURE's ost
 * **Dynamic Web Server:** Built on **Flask** to handle game state adequately
 * **CI/CD Pipeline:** Uses a workspace to automatically lint code and test the game engine and spotify server on every commit
 
@@ -75,7 +73,7 @@ Welcome to **PRESSUREDLE**, a passion project inspired by the ROBLOX Survival-Ho
   
 ## ⬆️ Future Updates: 
 * Configuring Images so people can see the monster the game selected
-* Configuring Spotify so that music will play from the webpage
+* Since Spotipy doesn't like when people don't have spotify, I'm finding another way to implement music
 * Ability to turn off music if the user desires 
      
    

@@ -44,7 +44,8 @@ def game_loop():
         return redirect(url_for('game.default'))
     if request.method == 'POST':
         if not session.get('game_over', False):
-            user_guess = request.form.get('monster_guess', '').strip()
+            raw_guess = request.form.get('monster_guess', '').strip()
+            user_guess = " ".join(raw_guess.split()).title()
 
             if user_guess and GAME_ENGINE.is_valid_guess(user_guess):
                 previous_guesses = [g['guess'] for g in session.get('guesses', [])]
@@ -85,6 +86,9 @@ def game_loop():
 
 @game_bp.route('/default', methods=['GET', 'POST'])
 def default(): 
+    if 'user' not in session: 
+        return redirect(url_for('auth.login'))
+
     session['difficulty'] = 'medium'
     session['total_turns'] = 9
     session['guesses'] = []

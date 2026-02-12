@@ -23,7 +23,8 @@ def configure_debug_mode():
             os.environ['DEBUG_ACCESS_GRANTED'] = 'true'
             app.config['CHEAT_MODE'] = True
             print("\n--- Monster Override ---")
-            target_monster = input("Enter monster name to force (or press Enter for random): ").strip()            
+            raw_monster = input("Enter monster name to force (or press Enter for random): ").strip()
+            target_monster = " ".join(raw_monster.split()).title() 
             if target_monster:
                 if engine.is_valid_guess(target_monster):
                     print(f"🎯 Target Locked: {target_monster}")

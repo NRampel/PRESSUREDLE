@@ -3,6 +3,8 @@ from app.services.game_logic import engine as GAME_ENGINE
 from app.config import Config
 import time
 import os 
+from app import db
+from app.models import User
 
 game_bp = Blueprint('game', __name__) 
 
@@ -17,7 +19,12 @@ def inject_background():
 
 @game_bp.route('/set_difficulty', methods=['POST'])
 def set_difficulty():
+    user_id = session.get('user_id')
+    username = session.get('user')
     session.clear() 
+    if user_id:
+        session['user_id'] = user_id
+        session['user'] = username
 
     difficulty_level = current_app.config['DIFFICULTY']
     chosen_difficulty = request.form.get('difficulty', 'medium')
@@ -58,9 +65,23 @@ def game_loop():
                     if guess_result['is_correct']:
                         session['game_over'] = True
                         session['game_status'] = 'win'
+                        if 'user_id' in session:
+                            user = User.query.get(session['user_id'])
+                            if user:
+                                user.games_played += 1
+                                user.games_won += 1
+                                user.current_streak += 1
+                                db.session.commit()
                     elif session['turns_taken'] >= session['total_turns']:
                         session['game_over'] = True
                         session['game_status'] = 'lose'
+                        if 'user_id' in session:
+                            user = User.query.get(session['user_id'])
+                            if user:
+                                user.games_played += 1
+                                user.games_lost += 1
+                                user.current_streak = 0
+                                db.session.commit()
                     end_time = time.time() 
                     start_time = session.get('start_time', end_time)
                     session['final_time'] = round(end_time - start_time, 2)

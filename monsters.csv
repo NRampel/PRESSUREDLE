@@ -11,7 +11,7 @@ Pandemonium,Main,Hostile,Rare,100,Conditional,Story/Endless,No,Sexless
 Abomination,Grand,Hostile,Common,50,Fast,Story,No,Male
 Vultus Luminaria,Grand,Hostile,Guaranteed,40,Medium,Story,Yes,Unknown
 Painter,Not,Hostile,Rare,0,Irrelevant,Story/Endless,No,Sexless
-Firewall,Grand,Hostile,Common,50,Medium,Story/Endless,No,Sexless
+Firewall,Grand,Hostile,Common,50,Medium,Story,No,Sexless
 Harbinger,Main,Hostile,Conditional,100,Slow,Endless,Yes,Sexless
 Pipsqueak,Node,Hostile,Guaranteed,100,Conditional,Hunted,No,Male
 Crooked,Main,Neutral,Guaranteed,30,Fast,Hunted,No,Male

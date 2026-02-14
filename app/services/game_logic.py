@@ -5,35 +5,35 @@ from app.config import Config
 
 class GameEngine: 
     def __init__(self): 
-        self.all_monsters = pd.DataFrame() 
+        self.all_monsters = {}
         self.headers = [] 
         self.numeric_attributes = Config.NUMERIC_ATTRIBUTES
         self._load_monsters((Config.ENTITY_LIST))
 
     def _load_monsters(self, path):
-        self.all_monsters = pd.read_csv(path)
-        self.all_monsters.columns = self.all_monsters.columns.str.strip() 
-        self.all_monsters.set_index('Name:', inplace=True)
-        self.headers = self.all_monsters.columns.tolist() 
+        df = pd.read_csv(path)
+        df.columns = df.columns.str.strip() 
+        self.headers = [c for c in df.columns.tolist() if c != 'Name:']
+        self.all_monsters = df.set_index('Name:').to_dict(orient='index')
         print("Monsters were successfully loaded!")
 
     def choose_random_monster(self): 
-        return random.choice(self.all_monsters.index)
+        return random.choice(list(self.all_monsters.keys()))
 
     def select_monster(self, monster_name=None):
-        if monster_name and monster_name in self.all_monsters.index:
+        if monster_name and monster_name in self.all_monsters: 
             return monster_name
         return self.choose_random_monster()
 
     def is_valid_guess(self, guess_name): 
-        return guess_name in self.all_monsters.index
+        return guess_name in self.all_monsters
     
     def compare_guess(self, guess_name, target): 
         if not self.is_valid_guess(guess_name): 
             return {'ERROR': 'Invalid Monster Name!'}
         
-        guess_attributes = self.all_monsters.loc[guess_name] 
-        target_attributes = self.all_monsters.loc[target] 
+        guess_attributes = self.all_monsters[guess_name] 
+        target_attributes = self.all_monsters[target] 
         results = {
             'guess': guess_name,
             'attributes': [], 

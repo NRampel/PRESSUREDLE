@@ -16,5 +16,5 @@ class Config:
         'medium': 9, 
         'hard': 5
     }
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') 
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///site.db') 
     SQLALCHEMY_TRACK_MODIFICATIONS = False

@@ -47,6 +47,16 @@ def set_difficulty():
 
 @game_bp.route('/game_loop', methods=['GET', 'POST'])
 def game_loop(): 
+    debug_monster = current_app.config.get('DEBUG_MONSTER')
+    current_monster = session.get('selected_monster')
+    if debug_monster and current_monster != debug_monster:
+        print(f"⚡ GOD MODE: Overriding {current_monster} with {debug_monster}")
+        session['selected_monster'] = GAME_ENGINE.select_monster(debug_monster)
+        session['guesses'] = []
+        session['turns_taken'] = 0
+        session['game_over'] = False
+        session['game_status'] = 'playing'
+        session['start_time'] = time.time()
     if not session.get('selected_monster'):
         return redirect(url_for('game.default'))
     if request.method == 'POST':

@@ -7,6 +7,7 @@ class GameEngine:
     def __init__(self): 
         self.all_monsters = {}
         self.headers = [] 
+        self.name_lookup = {}
         self.numeric_attributes = Config.NUMERIC_ATTRIBUTES
         self._load_monsters((Config.ENTITY_LIST))
 
@@ -15,6 +16,7 @@ class GameEngine:
         df.columns = df.columns.str.strip() 
         self.headers = [c for c in df.columns.tolist() if c != 'Name:']
         self.all_monsters = df.set_index('Name:').to_dict(orient='index')
+        self.name_lookup = {name.lower(): name for name in self.all_monsters.keys()}
         print("Monsters were successfully loaded!")
 
     def choose_random_monster(self): 
@@ -26,18 +28,20 @@ class GameEngine:
         return self.choose_random_monster()
 
     def is_valid_guess(self, guess_name): 
-        return guess_name in self.all_monsters
+        return guess_name.lower() in self.name_lookup
     
     def compare_guess(self, guess_name, target): 
+        clean_guess = guess_name.lower()
         if not self.is_valid_guess(guess_name): 
             return {'ERROR': 'Invalid Monster Name!'}
+        guess_search = self.name_lookup.get(clean_guess)
         
-        guess_attributes = self.all_monsters[guess_name] 
+        guess_attributes = self.all_monsters[guess_search] 
         target_attributes = self.all_monsters[target] 
         results = {
-            'guess': guess_name,
+            'guess': guess_search,
             'attributes': [], 
-            'is_correct': guess_name == target
+            'is_correct': guess_search == target
         }
         for attr in self.headers: 
            guess_val = guess_attributes[attr]

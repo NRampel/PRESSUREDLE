@@ -43,12 +43,15 @@ class GameEngine:
             'attributes': [], 
             'is_correct': guess_search == target
         }
+        matches = 0
+        total_attributes = len(self.headers)
         for attr in self.headers: 
            guess_val = guess_attributes[attr]
            target_val = target_attributes[attr]
            
            if guess_val == target_val: 
                outcome = 'correct'
+               matches += 1
            elif attr in self.numeric_attributes: 
                try: 
                      guess_num = float(guess_val)
@@ -66,6 +69,8 @@ class GameEngine:
                'guess_value': guess_val,
                'status': outcome
            }) 
+        results['score'] = matches 
+        results['total_attributes'] = total_attributes
         return results 
 
 engine = GameEngine() 

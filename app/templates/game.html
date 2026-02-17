@@ -7,6 +7,20 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
 </head>
 <body>
+    {% if session_data.get('best_guess') %}
+        <div class="closest-sidebar">
+            <h3> Closest Match </h3>
+            <div class="monster_card"> 
+                <h4>{{ session_data['best_guess']['guess'] }}</h4>
+                <p>Score: {{ session_data['best_guess']['score'] }} / 8 </p>
+                <div class="mini-attributes">
+                    {% for attr in session_data['best_guess']['attributes'] %}
+                        <span class="dot {{ attr.status }}" title="{{ attr.category }}: {{ attr.guess_value }}"></span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
     <div class="container">
         <form action="{{ url_for('auth.logout') }}" method="post" style="position: absolute; top: 0; right: 0; margin-top: 10px; margin-right: 10px;">
             <button type="submit">Logout</button>
@@ -81,6 +95,7 @@
                     {% endfor %}
                 </div>
             {% endif %}
+        
 
             {% for guess in guesses %}
                 <div class="row" id="row-{{ guess.guess | replace(' ', '-') }}">

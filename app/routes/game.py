@@ -71,6 +71,10 @@ def game_loop():
                 else:
                     session['turns_taken'] += 1 
                     guess_result = GAME_ENGINE.compare_guess(user_guess, session['selected_monster'])
+                    current_score = guess_result['score']
+                    best_guess = session.get('best_guess', None)
+                    if not best_guess or current_score > best_guess['score']:
+                        session['best_guess'] = guess_result
                     session['guesses'].insert(0, guess_result)
                     if guess_result['is_correct']:
                         session['game_over'] = True

@@ -8,7 +8,8 @@ class GameEngine:
         self.all_monsters = {}
         self.headers = [] 
         self.name_lookup = {}
-        self.numeric_attributes = Config.NUMERIC_ATTRIBUTES
+        self.monster_name_list = []
+        self.numeric_attributes = set(Config.NUMERIC_ATTRIBUTES)
         self._load_monsters((Config.ENTITY_LIST))
 
     def _load_monsters(self, path):
@@ -17,10 +18,11 @@ class GameEngine:
         self.headers = [c for c in df.columns.tolist() if c != 'Name:']
         self.all_monsters = df.set_index('Name:').to_dict(orient='index')
         self.name_lookup = {name.lower(): name for name in self.all_monsters.keys()}
+        self.monster_name_list = list(self.all_monsters.keys())
         print("Monsters were successfully loaded!")
 
     def choose_random_monster(self): 
-        return random.choice(list(self.all_monsters.keys()))
+        return random.choice(self.monster_name_list)
 
     def select_monster(self, monster_name=None):
         if monster_name and monster_name in self.all_monsters: 
@@ -58,8 +60,11 @@ class GameEngine:
                      target_num = float(target_val)
                      if guess_num < target_num: 
                           outcome = 'low'
-                     else: 
+                     elif guess_num > target_num: 
                           outcome = 'high'
+                     else:
+                          outcome = 'correct'
+                          matches += 1
                except (ValueError, TypeError): 
                      outcome = 'incorrect'
            else:

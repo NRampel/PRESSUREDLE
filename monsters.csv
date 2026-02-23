@@ -9,7 +9,7 @@ Wall Dweller,Main,Hostile,Rare,100,Medium,Story/Endless,No,Unknown
 Trenchbleeder,Not,Docile,Guaranteed,100,Irrelevant,Story/Endless,No,Sexless
 Pandemonium,Main,Hostile,Rare,100,Conditional,Story/Endless,No,Sexless
 Abomination,Grand,Hostile,Common,50,Fast,Story,No,Male
-Vultus Luminaria,Grand,Hostile,Guaranteed,40,Medium,Story,Yes,Unknown
+Searchlights,Grand,Hostile,Guaranteed,40,Medium,Story,Yes,Unknown
 Painter,Not,Hostile,Rare,0,Irrelevant,Story/Endless,No,Sexless
 Firewall,Grand,Hostile,Common,50,Medium,Story,No,Sexless
 Harbinger,Main,Hostile,Conditional,100,Slow,Endless,Yes,Sexless
@@ -17,7 +17,7 @@ Pipsqueak,Node,Hostile,Guaranteed,100,Conditional,Hunted,No,Male
 Crooked,Main,Neutral,Guaranteed,30,Fast,Hunted,No,Male
 Candlebearer,Conditional,Neutral,Uncommon,30,Slow,All,No,Sexless
 Candlebrute,Main,Hostile,Rare,40,Medium,All,No,Sexless
-Redeemer,Conditional,Hostile,Common,25,Slow,Story/Endless,No,Female
+Hanger,Conditional,Hostile,Common,25,Slow,Story/Endless,No,Female
 Void Mass,Conditional,Hostile,Guaranteed,Varies,Irrelevant,Story/Endless,No,Sexless
 Good People,Conditional,Hostile,Guaranteed,60,Irrelevant,Story/Endless,No,Sexless
 Eyefestation,Main,Hostile,Guaranteed,Varies,Irrelevant,Story/Endless,No,Female

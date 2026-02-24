@@ -112,7 +112,7 @@ button:hover {
 .monster-reveal-img {
     width: 300px;
     height: 300px;
-    object-fit: contain; 
+    object-fit: fill; 
     border-radius: var(--border-radius);
     display: block; 
     margin: 10px auto; 

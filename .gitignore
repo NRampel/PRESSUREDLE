@@ -9,3 +9,4 @@ instance
 *.db
 *.sqlite3
 flask_session/
+tests/utils.py

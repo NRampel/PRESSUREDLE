@@ -6,6 +6,7 @@ colorama
 flake8
 Flask
 Flask-SQLAlchemy
+Flask-session
 greenlet
 gunicorn
 idna

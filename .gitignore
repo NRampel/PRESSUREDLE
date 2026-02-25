@@ -8,3 +8,4 @@ __pycache__/
 instance
 *.db
 *.sqlite3
+flask_session/

@@ -17,123 +17,98 @@ def inject_background():
         bg_files = [] 
     return {'bg_files': bg_files}
 
+def _start_game(difficulty):
+    diff_map = current_app.config['DIFFICULTY']
+    diff = difficulty if difficulty in diff_map else 'medium'
+    
+    forced = current_app.config.get('DEBUG_MONSTER') if current_app.config.get('CHEAT_MODE') else None
+    if forced: print(f"Debug mode: Forcing monster to {forced}")
+
+    session.update({
+        'difficulty': diff,
+        'total_turns': diff_map[diff],
+        'guesses': [],
+        'turns_taken': 0,
+        'game_over': False,
+        'game_status': 'playing',
+        'selected_monster': GAME_ENGINE.select_monster(forced),
+        'start_time': time.time()
+    })
+
+def _update_stats(win):
+    if 'user_id' not in session: return
+    user = User.query.get(session['user_id'])
+    if not user: return
+    user.games_played += 1
+    if win:
+        user.games_won += 1
+        user.current_streak += 1
+    else:
+        user.games_lost += 1
+        user.current_streak = 0
+    db.session.commit()
+
 @game_bp.route('/set_difficulty', methods=['POST'])
 def set_difficulty():
-    user_id = session.get('user_id')
-    username = session.get('user')
+    uid, uname = session.get('user_id'), session.get('user')
     session.clear() 
-    if user_id:
-        session['user_id'] = user_id
-        session['user'] = username
-
-    difficulty_level = current_app.config['DIFFICULTY']
-    chosen_difficulty = request.form.get('difficulty', 'medium')
-    if chosen_difficulty not in difficulty_level:
-        chosen_difficulty = 'medium' 
-    session['difficulty'] = chosen_difficulty
-    session['total_turns'] = difficulty_level[chosen_difficulty]
-    session['guesses'] = []
-    session['turns_taken'] = 0
-    session['game_over'] = False
-    session['game_status'] = 'playing'
-    forced_name = None
-
-    if current_app.config.get('CHEAT_MODE') and current_app.config.get('DEBUG_MONSTER'):
-        forced_name = current_app.config['DEBUG_MONSTER']
-        print(f"Debug mode: Forcing monster to {forced_name}")
-    session['selected_monster'] = GAME_ENGINE.select_monster(forced_name) 
-    session['start_time'] = time.time() 
+    if uid: session.update({'user_id': uid, 'user': uname})
+    _start_game(request.form.get('difficulty'))
     return redirect(url_for('game.game_loop'))
 
 @game_bp.route('/game_loop', methods=['GET', 'POST'])
 def game_loop(): 
     debug_monster = current_app.config.get('DEBUG_MONSTER')
-    current_monster = session.get('selected_monster')
-    if debug_monster and current_monster != debug_monster:
-        print(f"⚡ GOD MODE: Overriding {current_monster} with {debug_monster}")
-        session['selected_monster'] = GAME_ENGINE.select_monster(debug_monster)
-        session['guesses'] = []
-        session['turns_taken'] = 0
-        session['game_over'] = False
-        session['game_status'] = 'playing'
-        session['start_time'] = time.time()
+    if debug_monster and session.get('selected_monster') != debug_monster:
+        print(f"⚡ GOD MODE: Overriding {session.get('selected_monster')} with {debug_monster}")
+        _start_game(session.get('difficulty', 'medium'))
+
     if not session.get('selected_monster'):
         return redirect(url_for('game.default'))
-    if request.method == 'POST':
-        if not session.get('game_over', False):
-            raw_guess = request.form.get('monster_guess', '').strip()
-            user_guess = " ".join(raw_guess.split()).title()
 
-            if user_guess and GAME_ENGINE.is_valid_guess(user_guess):
-                previous_guesses = [g['guess'] for g in session.get('guesses', [])]
-                if user_guess in previous_guesses:
-                    flash(f"You already guessed {user_guess}. Try a different monster.")
-                else:
-                    session['turns_taken'] += 1 
-                    guess_result = GAME_ENGINE.compare_guess(user_guess, session['selected_monster'])
-                    current_score = guess_result['score']
-                    best_guess = session.get('best_guess', None)
-                    if not best_guess or current_score > best_guess['score']:
-                        session['best_guess'] = guess_result
-                    session['guesses'].insert(0, guess_result)
-                    if guess_result['is_correct']:
-                        session['game_over'] = True
-                        session['game_status'] = 'win'
-                        if 'user_id' in session:
-                            user = User.query.get(session['user_id'])
-                            if user:
-                                user.games_played += 1
-                                user.games_won += 1
-                                user.current_streak += 1
-                                db.session.commit()
-                    elif session['turns_taken'] >= session['total_turns']:
-                        session['game_over'] = True
-                        session['game_status'] = 'lose'
-                        if 'user_id' in session:
-                            user = User.query.get(session['user_id'])
-                            if user:
-                                user.games_played += 1
-                                user.games_lost += 1
-                                user.current_streak = 0
-                                db.session.commit()
-                    end_time = time.time() 
-                    start_time = session.get('start_time', end_time)
-                    session['final_time'] = round(end_time - start_time, 2)
-            elif user_guess:
-                flash(f"{user_guess} is not a valid monster name. Please try again.")
-        session.modified = True 
+    if request.method == 'POST' and not session.get('game_over'):
+        guess = " ".join(request.form.get('monster_guess', '').split()).title()
+
+        if guess and GAME_ENGINE.is_valid_guess(guess):
+            guesses = session.get('guesses', [])
+            if any(g['guess'] == guess for g in guesses):
+                flash(f"You already guessed {guess}. Try a different monster.")
+            else:
+                session['turns_taken'] += 1 
+                result = GAME_ENGINE.compare_guess(guess, session['selected_monster'])
+                
+                best = session.get('best_guess')
+                if not best or result['score'] > best['score']:
+                    session['best_guess'] = result
+                
+                guesses.insert(0, result)
+                session['guesses'] = guesses
+                session.modified = True 
+                
+                if result['is_correct']:
+                    session.update({'game_over': True, 'game_status': 'win'})
+                    _update_stats(True)
+                    session['final_time'] = round(time.time() - session.get('start_time', time.time()), 2)
+                elif session['turns_taken'] >= session['total_turns']:
+                    session.update({'game_over': True, 'game_status': 'lose'})
+                    _update_stats(False)
+                    session['final_time'] = round(time.time() - session.get('start_time', time.time()), 2)
+        elif guess:
+            flash(f"{guess} is not a valid monster name. Please try again.")
         return redirect(url_for('game.game_loop'))
 
-    highlight_name = session.pop('highlight_guess', None)  
-
-    monster_image_url = None
-    if session.get('game_over') and session.get('selected_monster'):
-        monster_name = session['selected_monster']
-        monster_image_url = url_for('static', filename=f'images/{monster_name}.png')
+    img_url = url_for('static', filename=f"images/{session['selected_monster']}.png") if session.get('game_over') else None
 
     return render_template('game.html', 
                            guesses=session.get('guesses', []), 
                            headers=GAME_ENGINE.headers,
                            session_data=session, 
-                           highlight_name=highlight_name,
-                           monster_image_url=monster_image_url)
+                           highlight_name=session.pop('highlight_guess', None),
+                           monster_image_url=img_url)
    
 
 @game_bp.route('/default', methods=['GET', 'POST'])
 def default(): 
-    if 'user' not in session: 
-        return redirect(url_for('auth.login'))
-
-    session['difficulty'] = 'medium'
-    session['total_turns'] = 9
-    session['guesses'] = []
-    session['turns_taken'] = 0
-    session['game_over'] = False
-    session['game_status'] = 'playing'
-    forced_name = None
-
-    if current_app.config.get('CHEAT_MODE') and current_app.config.get('DEBUG_MONSTER'):
-        forced_name = current_app.config['DEBUG_MONSTER']
-        print(f"Debug mode: Forcing monster to {forced_name}")
-    session['selected_monster'] = GAME_ENGINE.select_monster(forced_name)  
+    if 'user' not in session: return redirect(url_for('auth.login'))
+    _start_game('medium')
     return redirect(url_for('game.game_loop'))

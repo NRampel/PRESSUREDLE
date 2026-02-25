@@ -1,4 +1,3 @@
-# NOTE: IGNORE ANY IMPORT ERRORS, THAT IS JUST VSCODE TWEAKING OUT FOR NO REASON
 import pandas as pd 
 import random 
 from app.config import Config 

@@ -1,36 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Pressuredle</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>About This Game</h1>
-        <p>
-            This game was created with inspiration from both 
-            Wordle and Pressure, a roblox horror game.
-        </p>
-        <p>Pressure was created by Zeal and his development team,
-            Wordle was developed by Josh Wardle.</p>
-        <p> 
-            Music was created by NoLongerNull, check out their other songs! 
-            (MUSIC WILL BE ADDED SOON)
-        </p>
-        <iframe data-testid="embed-iframe" 
-            style="border-radius:12px" 
-            src="https://open.spotify.com/embed/artist/12xc327EsVjOW5LepkAus5?utm_source=generator" 
-            width="100%" 
-            height="152" 
-            frameBorder="0" 
-            allowfullscreen="" 
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-            loading="lazy">
-        </iframe>
-        <br>
-        <a href="{{ url_for('game.game_loop') }}">Back to Game</a>
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}About - Pressuredle{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>About This Game</h1>
+    <p>
+        This game was created with inspiration from both 
+        Wordle and Pressure, a roblox horror game.
+    </p>
+    <p>
+        Pressure was created by Zeal and his development team,
+        Wordle was developed by Josh Wardle.
+    </p>
+    <p> 
+        Music was created by NoLongerNull, check out their other songs! 
+        (MUSIC WILL BE ADDED SOON)
+    </p>
+    
+    <iframe data-testid="embed-iframe" 
+        style="border-radius:12px" 
+        src="https://open.spotify.com/embed/artist/12xc327EsVjOW5LepkAus5?utm_source=generator" 
+        width="100%" 
+        height="152" 
+        frameBorder="0" 
+        allowfullscreen="" 
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+        loading="lazy">
+    </iframe>
+    
+    <br>
+    <a href="{{ url_for('game.game_loop') }}">Back to Game</a>
+</div>
+{% endblock %}

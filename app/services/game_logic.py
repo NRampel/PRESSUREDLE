@@ -36,10 +36,11 @@ class GameEngine:
         clean_guess = guess_name.lower()
         if not self.is_valid_guess(guess_name): 
             return {'ERROR': 'Invalid Monster Name!'}
+
         guess_search = self.name_lookup.get(clean_guess)
-        
         guess_attributes = self.all_monsters[guess_search] 
         target_attributes = self.all_monsters[target] 
+
         results = {
             'guess': guess_search,
             'attributes': [], 
@@ -47,24 +48,32 @@ class GameEngine:
         }
         matches = 0
         total_attributes = len(self.headers)
+
         for attr in self.headers: 
            guess_val = guess_attributes[attr]
            target_val = target_attributes[attr]
+           outcome = 'incorrect'
+           direction = None
            
-           if guess_val == target_val: 
+           if str(guess_val).strip() == str(target_val).strip(): 
                outcome = 'correct'
                matches += 1
            elif attr in self.numeric_attributes: 
                try: 
-                     guess_num = float(guess_val)
-                     target_num = float(target_val)
+                     guess_num = int(guess_val)
+                     target_num = int(target_val)
+                     diff = abs(guess_num - target_num)
+
+                     if diff <= 20: 
+                        outcome = 'close'
+                     else: 
+                        outcome = 'incorrect'
+
+
                      if guess_num < target_num: 
-                          outcome = 'low'
+                          direction = 'low'
                      elif guess_num > target_num: 
-                          outcome = 'high'
-                     else:
-                          outcome = 'correct'
-                          matches += 1
+                          direction = 'high'
                except (ValueError, TypeError): 
                      outcome = 'incorrect'
            else:
@@ -72,7 +81,8 @@ class GameEngine:
            results['attributes'].append({ 
                'category': attr,
                'guess_value': guess_val,
-               'status': outcome
+               'status': outcome, 
+               'direction': direction
            }) 
         results['score'] = matches 
         results['total_attributes'] = total_attributes

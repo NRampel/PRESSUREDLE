@@ -10,7 +10,7 @@ class Config:
     SPOT_CLIENT_SEC = os.getenv("SPOT_CLIENT_SEC")
     SPOT_REDIRECT_URL = os.getenv("SPOT_REDIRECT_URL")
     ENTITY_LIST = os.getenv('MONSTER_PATH', 'monsters.csv')
-    NUMERIC_ATTRIBUTES = ['Damage', 'Speed']
+    NUMERIC_ATTRIBUTES = ['Damage:']
     DIFFICULTY = {
         'easy': 12, 
         'medium': 9, 

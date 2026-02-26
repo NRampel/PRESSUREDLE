@@ -1,20 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pressuredle</title>
+{% extends "base.html" %}
 
-   
-    <meta http-equiv="refresh" content="4; url={{ url_for('game.default') }}">
+{% block title %}Pressuredle - Welcome{% endblock %}
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/greeting.css') }}">
-</head>
-<body>
-    <div class="container">
-        <h1>Welcome to PRESSUREDLE!</h1>
-        <p>Redirecting in <span id="countdown">3</span>...</p>
-        <script src="{{ url_for('static', filename='js/greeting.js') }}"></script>
-    </div>
-</body>
-</html>
+{% block head_extra %}
+<meta http-equiv="refresh" content="4; url={{ url_for('game.default') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/greeting.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Welcome to PRESSUREDLE!</h1>
+    <p>Redirecting in <span id="countdown">3</span>...</p>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/greeting.js') }}"></script>
+{% endblock %}

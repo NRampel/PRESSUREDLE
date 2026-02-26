@@ -96,6 +96,10 @@ button:hover {
 }
 .correct { background-color: var(--color-correct); }
 .incorrect { background-color: var(--color-incorrect); }
+.close {
+    background-color: #ffd700; 
+    color: #000;
+}
 .low, .high { 
     background-color: var(--color-partial);
     color: var(--color-partial-text);

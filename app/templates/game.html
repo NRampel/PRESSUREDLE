@@ -1,121 +1,123 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PRESSUREDLE</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
-</head>
-<body>
-    {% if session_data.get('best_guess') %}
-        <div class="closest-sidebar">
-            <h3> Closest Match </h3>
-            <div class="monster_card"> 
-                <h4>{{ session_data['best_guess']['guess'] }}</h4>
-                <p>Score: {{ session_data['best_guess']['score'] }} / 8 </p>
-                <div class="mini-attributes">
-                    {% for attr in session_data['best_guess']['attributes'] %}
-                        <span class="dot {{ attr.status }}" title="{{ attr.category }}: {{ attr.guess_value }}"></span>
-                    {% endfor %}
-                </div>
+{% extends "base.html" %}
+
+{% block title %}PRESSUREDLE{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/game.css') }}">
+{% endblock %}
+
+{% block content %}
+{% if session_data.get('best_guess') %}
+    <div class="closest-sidebar">
+        <h3> Closest Match </h3>
+        <div class="monster_card"> 
+            <h4>{{ session_data['best_guess']['guess'] }}</h4>
+            <p>Score: {{ session_data['best_guess']['score'] }} / 8 </p>
+            <div class="mini-attributes">
+                {% for attr in session_data['best_guess']['attributes'] %}
+                    <span class="dot {{ attr.status }}" title="{{ attr.category }}: {{ attr.guess_value }}"></span>
+                {% endfor %}
             </div>
         </div>
-        {% endif %}
-    <div class="container">
-        <form action="{{ url_for('auth.logout') }}" method="post" style="position: absolute; top: 0; right: 0; margin-top: 10px; margin-right: 10px;">
-            <button type="submit">Logout</button>
-        </form>
-        <h1>PRESSUREDLE</h1>
-        <nav>
-            <a href="{{ url_for('main.about') }}">About</a>
-            <a href="{{ url_for('main.view_attributes') }}">Attributes</a> 
-        </nav>
+    </div>
+{% endif %}
 
+<div class="container">
+    <form action="{{ url_for('auth.logout') }}" method="post" style="position: absolute; top: 0; right: 0; margin-top: 10px; margin-right: 10px;">
+        <button type="submit">Logout</button>
+    </form>
+    <h1>PRESSUREDLE</h1>
+    <nav>
+        <a href="{{ url_for('main.about') }}">About</a>
+        <a href="{{ url_for('main.view_attributes') }}">Attributes</a> 
+    </nav>
+
+    <div class="form-group">
+        <form id="difficulty-form" action="{{ url_for('game.set_difficulty') }}" method="POST">
+            <label for="difficulty-select">Select Difficulty:</label>
+            <select name="difficulty" id="difficulty-select">
+                <option value="easy" {% if session_data.get('difficulty') == 'easy' %}selected{% endif %}>Easy</option>
+                <option value="medium" {% if session_data.get('difficulty') == 'medium' %}selected{% endif %}>Medium</option>
+                <option value="hard" {% if session_data.get('difficulty') == 'hard' %}selected{% endif %}>Hard</option>
+            </select>
+            <button type="submit" onclick="sessionStorage.removeItem('active_background')">Start New Game</button>
+        </form>
+    </div>
+
+    {% if session_data.get('selected_monster') %}
+        <div class="game-info">
+            <p>
+                Current Difficulty: <strong>{{ session_data.get('difficulty', 'medium') | capitalize }}</strong> |
+                Turns Remaining: <strong>{{ session_data.get('total_turns', 0) - session_data.get('turns_taken', 0) }}</strong>
+                | Stopwatch: <strong id="stopwatch">00:00</strong>
+            </p>
+        </div>
+    {% endif %}
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% if not session_data.get('game_over') %}
         <div class="form-group">
-            <form id="difficulty-form" action="{{ url_for('game.set_difficulty') }}" method="POST">
-                <label for="difficulty-select">Select Difficulty:</label>
-                <select name="difficulty" id="difficulty-select">
-                    <option value="easy" {% if session_data.get('difficulty') == 'easy' %}selected{% endif %}>Easy</option>
-                    <option value="medium" {% if session_data.get('difficulty') == 'medium' %}selected{% endif %}>Medium</option>
-                    <option value="hard" {% if session_data.get('difficulty') == 'hard' %}selected{% endif %}>Hard</option>
-                </select>
-                <button type="submit" onclick="sessionStorage.removeItem('active_background')">Start New Game</button>
+            <form method="POST" action="{{ url_for('game.game_loop') }}" autocomplete="off">
+                <input type="text" name="monster_guess" placeholder="Type monster name..." size="30" autofocus>
+                <button type="submit">Guess</button>
             </form>
         </div>
+    {% else %}
+        <div class="game-over-message">
+            {% if session_data.get('game_status') == 'win' %}
+                <h2>Congratulations, you won!</h2>
+                <p>You guessed it correctly: <strong>{{ session_data.get('selected_monster') }}</strong></p>
+            {% else %}
+                <h2>Game Over!</h2>
+                <p>You've used all your turns. The monster was: <strong>{{ session_data.get('selected_monster') }}</strong></p>
+            {% endif %}
+                <img src="{{ monster_image_url }}" alt="Monster Image" class="monster-reveal-img">
+                <h2>Time took: <strong id="final-time">Calculating...</strong></h2>
+            <form id="play-again-form" action="{{ url_for('game.set_difficulty') }}" method="POST">
+                <input type="hidden" name="difficulty" value="{{ session_data.get('difficulty', 'medium') }}">
+                <button type="submit">Play Again</button>
+            </form>
+        </div>
+    {% endif %}
 
-        {% if session_data.get('selected_monster') %}
-            <div class="game-info">
-                <p>
-                    Current Difficulty: <strong>{{ session_data.get('difficulty', 'medium') | capitalize }}</strong> |
-                    Turns Remaining: <strong>{{ session_data.get('total_turns', 0) - session_data.get('turns_taken', 0) }}</strong>
-                    | Stopwatch: <strong id="stopwatch">00:00</strong>
-                </p>
-            </div>
-        {% endif %}
-        
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="flash-message {{ category }}">{{ message }}</div>
+    <div class="grid">
+        {% if guesses %}
+            <div class="row header">
+                <div class="cell">Name</div>
+                {% for header_name in headers %}
+                    <div class="cell">{{ header_name }}</div>
                 {% endfor %}
-            {% endif %}
-        {% endwith %}
-
-        {% if not session_data.get('game_over') %}
-            <div class="form-group">
-                <form method="POST" action="{{ url_for('game.game_loop') }}" autocomplete="off">
-                    <input type="text" name="monster_guess" placeholder="Type monster name..." size="30" autofocus>
-                    <button type="submit">Guess</button>
-                </form>
-            </div>
-        {% else %}
-            <div class="game-over-message">
-                {% if session_data.get('game_status') == 'win' %}
-                    <h2>Congratulations, you won!</h2>
-                    <p>You guessed it correctly: <strong>{{ session_data.get('selected_monster') }}</strong></p>
-                {% else %}
-                    <h2>Game Over!</h2>
-                    <p>You've used all your turns. The monster was: <strong>{{ session_data.get('selected_monster') }}</strong></p>
-                {% endif %}
-                    <img src="{{ monster_image_url }}" alt="Monster Image" class="monster-reveal-img">
-                    <h2>Time took: <strong id="final-time">Calculating...</strong></h2>
-                <form id="play-again-form" action="{{ url_for('game.set_difficulty') }}" method="POST">
-                    <input type="hidden" name="difficulty" value="{{ session_data.get('difficulty', 'medium') }}">
-                    <button type="submit">Play Again</button>
-                </form>
             </div>
         {% endif %}
-
-        <div class="grid">
-            {% if guesses %}
-                <div class="row header">
-                    <div class="cell">Name</div>
-                    {% for header_name in headers %}
-                        <div class="cell">{{ header_name }}</div>
-                    {% endfor %}
+    
+        {% for guess in guesses %}
+            <div class="row" id="row-{{ guess.guess | replace(' ', '-') }}">
+                <div class="cell {% if guess.is_correct %}correct{% else %}incorrect{% endif %}">
+                    {{ guess.guess }}
                 </div>
-            {% endif %}
-        
-
-            {% for guess in guesses %}
-                <div class="row" id="row-{{ guess.guess | replace(' ', '-') }}">
-                    <div class="cell {% if guess.is_correct %}correct{% else %}incorrect{% endif %}">
-                        {{ guess.guess }}
+                {% for attr in guess.attributes %}
+                    <div class="cell {{ attr.status }}">
+                        {% if attr.get('direction') == 'low' %} ⬆️ {% endif %}
+                        {% if attr.get('direction') == 'high' %} ⬇️ {% endif %} 
+                        {{ attr.guess_value }}
                     </div>
-                    {% for attr in guess.attributes %}
-                        <div class="cell {{ attr.status }}">
-                            {{ attr.guess_value }}
-                            {% if attr.status == 'low' %} ⬆️ {% endif %}
-                            {% if attr.status == 'high' %} ⬇️ {% endif %}
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endfor %}
+                {% endfor %}
             </div>
+        {% endfor %}
     </div>
-    <script>
-       window.GAME_BACKGROUNDS = {{ bg_files | tojson }}; 
-    </script>
-    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
-</body>
-</html>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+   window.GAME_BACKGROUNDS = {{ bg_files | tojson }}; 
+</script>
+<script src="{{ url_for('static', filename='js/game.js') }}"></script>
+{% endblock %}

@@ -1,10 +1,11 @@
 import os, getpass
 from dotenv import load_dotenv
-from app import create_app
+from app import create_app, db
 from app.services.game_logic import engine
 
 load_dotenv()
 app = create_app()
+
 
 def configure_debug():
     if os.getenv('DEBUG_ACCESS_GRANTED') == 'true':
@@ -14,7 +15,7 @@ def configure_debug():
         return True
 
     if not os.environ.get('WERKZEUG_RUN_MAIN'):
-        pwd = os.getenv('ADMIN_PSWRD', '1234')
+        pwd = os.getenv('ADMIN_PSWRD')
         prompt = f"🔒 Enter debug password: "
         
         if getpass.getpass(prompt) == pwd:

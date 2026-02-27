@@ -18,3 +18,8 @@ def create_app():
     app.register_blueprint(game_bp)
     app.register_blueprint(auth_bp)
     return app 
+
+
+with create_app().app_context():
+    db.create_all()
+    print("DB created")

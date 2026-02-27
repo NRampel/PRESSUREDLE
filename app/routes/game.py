@@ -4,7 +4,7 @@ from app.config import Config
 import time
 import os 
 from app import db
-from app.models import User
+from app.models import User, discoveredMonsters 
 
 game_bp = Blueprint('game', __name__) 
 
@@ -32,21 +32,34 @@ def _start_game(difficulty):
         'game_over': False,
         'game_status': 'playing',
         'selected_monster': GAME_ENGINE.select_monster(forced),
-        'start_time': time.time()
+        'start_time': time.time(),
+        'best_guess': None
     })
 
 def _update_stats(win):
     if 'user_id' not in session: return
     user = User.query.get(session['user_id'])
     if not user: return
+
+    discovered_monster = session.get('selected_monster')
+    already_found = discoveredMonsters.query.filter_by(
+        user_id=user.id, 
+        monster_name=discovered_monster
+    ).first()
+
     user.games_played += 1
+
     if win:
         user.games_won += 1
         user.current_streak += 1
+        if not already_found:
+            new_unlock = discoveredMonsters(monster_name=discovered_monster, user_id=user.id)
+            db.session.add(new_unlock)
     else:
         user.games_lost += 1
         user.current_streak = 0
     db.session.commit()
+
 
 @game_bp.route('/set_difficulty', methods=['POST'])
 def set_difficulty():
@@ -60,7 +73,6 @@ def set_difficulty():
 def game_loop(): 
     debug_monster = current_app.config.get('DEBUG_MONSTER')
     if debug_monster and session.get('selected_monster') != debug_monster:
-        print(f"⚡ GOD MODE: Overriding {session.get('selected_monster')} with {debug_monster}")
         _start_game(session.get('difficulty', 'medium'))
 
     if not session.get('selected_monster'):

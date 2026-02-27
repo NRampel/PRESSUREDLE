@@ -9,7 +9,7 @@
 
 # PRESSUREDLE (WIP) 
 
-
+[![Pressuredle Tester](https://github.com/NRampel/PRESSUREDLE/actions/workflows/pressuredle_tester.yml/badge.svg)](https://github.com/NRampel/PRESSUREDLE/actions/workflows/pressuredle_tester.yml)
 
 Welcome to **PRESSUREDLE**, a passion project inspired by the ROBLOX Survival-Horror game **PRESSURE** and **Wordle**
 

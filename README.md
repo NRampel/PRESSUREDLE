@@ -37,6 +37,7 @@ Welcome to **PRESSUREDLE**, a passion project inspired by the ROBLOX Survival-Ho
 2. Enter your guess in the guessing bar, game will provide feedback:
    * **🟩 Green** Indicates correctness
    * **🟥 Red** Indicates incorrectness
+   * **🟨 Yellow** Indicates closeness in regards to numeric attributes (currently only damage but I am figuring out how to apply this for speed)
    * **⬆️⬇️ Arrows** Indicates how incorrect you are for the numerical traits 
 3. To navigate through the site, click on the links above the difficulty bar
 

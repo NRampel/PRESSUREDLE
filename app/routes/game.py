@@ -60,7 +60,6 @@ def _update_stats(win):
         user.current_streak = 0
     db.session.commit()
 
-
 @game_bp.route('/set_difficulty', methods=['POST'])
 def set_difficulty():
     uid, uname = session.get('user_id'), session.get('user')

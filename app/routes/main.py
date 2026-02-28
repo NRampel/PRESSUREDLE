@@ -13,3 +13,7 @@ def about():
 @main_bp.route('/attrtibutes')
 def view_attributes():
     return render_template('attributes.html')
+
+@main_bp.route('/monsters_discovered')
+def view_discovered(): 
+    return render_template('monsters_discovered.html')

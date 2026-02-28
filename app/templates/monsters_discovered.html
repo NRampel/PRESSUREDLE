@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Monsters Discovered - Pressuredle{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/discovered.css')}}"> 
+{% endblock %}
+
+{% block content %}
+<div class="container text-center" style="margin-top: 40px;">
+    <h1>Monsters Discovered</h1>
+
+    <div class="monster-grid" id="grid-container">
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/monsters_discovered.js') }}"></script>
+<div class="container-nav">
+        <a href="{{ url_for('game.game_loop') }}">Back to Game</a>
+</div>
+{% endblock %}
